@@ -1,13 +1,19 @@
 require "openai"
 require "dotenv/load"
 
+``css
+.arabic {
+   unicode-bidi: embed;
+   direction: rtl;
+}
+
 client = OpenAI::Client.new(access_token: ENV.fetch("OPENAI_API_KEY"))
 
 # Prepare an Array of previous messages
 message_list = [
   {
     "role" => "system",
-    "content" => "You are a helpful assistant who talks like Shakespeare."
+    "content" => "You are a helpful assistant who talks in B2 English."
   },
   {
     "role" => "user",
