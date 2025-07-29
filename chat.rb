@@ -17,21 +17,25 @@ message_list = [
 
 user_input = ""
 
-while user_input !== "bye"
+while user_input != "bye"
   puts "Hello, how can I help you today?"
   puts "-" * 50
   user_input = gets.chomp
-if user_input = "bye"
-   message_list.push({ "role" => "user", "content" => user_input })
-end
 
-# Call the API to get the next message from GPT
-api_response = client.chat(
-  parameters: {
-    model: "gpt-3.5-turbo",
-    messages: message_list
-  }
-)
+  if user_input == "bye"
+    puts "Goodbye! Have a great day!"
+    break
+  end
+
+  # only push and call the API if it's not "bye"
+  message_list.push({ "role" => "user", "content" => user_input })
+
+  api_response = client.chat(
+    parameters: {
+      model: "gpt-3.5-turbo",
+      messages: message_list
+    }
+  )
     choices = api_response.fetch("choices")
     first_choice = choices.at(0)
     message = first_choice.fetch("message")
@@ -43,3 +47,4 @@ puts "-" * 50
 message_list.push({ "role" => "assistant", "content" => assistant_response })
 
 puts "Goodbye! Have a great day!"
+  end
