@@ -17,12 +17,13 @@ message_list = [
 
 user_input = ""
 
-while user_input != "bye"
+while user_input !== "bye"
   puts "Hello, how can I help you today?"
   puts "-" * 50
   user_input = gets.chomp
 if user_input = "bye"
    message_list.push({ "role" => "user", "content" => user_input })
+end
 
 # Call the API to get the next message from GPT
 api_response = client.chat(
